@@ -35,6 +35,10 @@ BASE_URL=http://localhost
 BASE_PORT=10000
 REACT_URL=http://localhost:3000
 */
+var BASE_URL string
+var BASE_PORT string
+var REACT_URL string
+var FRONT_URL string
 
 type User = mystructs.User
 type Credentials = mystructs.Credentials // uppercase json hmmhmm
@@ -54,7 +58,8 @@ var Userlist []User
 var validate *validator.Validate
 
 func Logout(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Origin", os.Getenv("FRONT_URL"))
+	//w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type,access-control-allow-origin, access-control-allow-headers")
 	w.Header().Set("Access-Control-Allow-Methods", "OPTIONS, GET")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
@@ -138,7 +143,8 @@ func Welcome(w http.ResponseWriter, r *http.Request) {
 }
 
 func Signin(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Origin", os.Getenv("FRONT_URL"))
+	//w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 	//w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type,access-control-allow-origin, access-control-allow-headers")
 	w.Header().Set("Access-Control-Allow-Methods", "OPTIONS, POST")
@@ -207,7 +213,7 @@ func getUserFromList(ul []User, username string) (*User, error) {
 }
 
 func Signup(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", os.Getenv("REACT_URL"))
+	w.Header().Set("Access-Control-Allow-Origin", os.Getenv("FRONT_URL"))
 	//w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type,access-control-allow-origin, access-control-allow-headers")
 	w.Header().Set("Access-Control-Allow-Methods", "OPTIONS, POST")
@@ -698,15 +704,17 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	base_url := os.Getenv("BASE_URL")
-	base_port := os.Getenv("BASE_PORT")
-	REACT_URL := os.Getenv("REACT_URL")
+	BASE_URL = os.Getenv("BASE_URL")
+	BASE_PORT = os.Getenv("BASE_PORT")
+	REACT_URL = os.Getenv("REACT_URL")
+	FRONT_URL = os.Getenv("FRONT_URL")
 
-	fmt.Println("base_url", base_url)
-	fmt.Println("base_port", base_port)
+	fmt.Println("base_url", BASE_URL)
+	fmt.Println("base_port", BASE_PORT)
 	fmt.Println("react_url", REACT_URL)
+	fmt.Println("front_url", FRONT_URL)
 
-	fmt.Println("Setting up a server on http://localhost:10000")
+	fmt.Println("Setting up a server on with port :10000")
 	excelporter.Excelimporter()
 	excelporter.Main()
 
