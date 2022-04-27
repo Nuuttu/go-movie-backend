@@ -695,14 +695,14 @@ func handleRequests() {
 		methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS", "DELETE"})
 	*/
 	// log.Fatal(http.ListenAndServe(":10000", toLowerCase(handlers.CORS(originsOk, headersOk, methodsOk)(router))))
-	log.Fatal(http.ListenAndServe(BASE_PORT, toLowerCase(logRequest(router))))
+	log.Fatal(http.ListenAndServe(`:`+BASE_PORT, toLowerCase(logRequest(router))))
 }
 
 func main() {
 
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Print("Error loading .env file")
 	}
 	BASE_URL = os.Getenv("BASE_URL")
 	BASE_PORT = os.Getenv("BASE_PORT")
@@ -714,7 +714,7 @@ func main() {
 	fmt.Println("react_url", REACT_URL)
 	fmt.Println("front_url", FRONT_URL)
 
-	fmt.Println("Setting up a server on with port ", BASE_PORT)
+	fmt.Println("Setting up a server on with port :", BASE_PORT)
 	excelporter.Excelimporter()
 	excelporter.Main()
 
