@@ -1,7 +1,7 @@
 FROM golang:1.18
 
 WORKDIR /app
-COPY ./enpoints ./app
+COPY ./endpoints ./app
 COPY ./structs ./app
 COPY ./utils ./app
 
