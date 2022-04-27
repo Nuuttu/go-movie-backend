@@ -1,6 +1,9 @@
 FROM golang:1.18
 
 WORKDIR /app
+COPY ./enpoints ./app
+COPY ./structs ./app
+COPY ./utils ./app
 
 # pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change
 COPY go.mod go.sum ./
