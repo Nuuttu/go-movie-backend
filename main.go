@@ -90,6 +90,9 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// TODO: https://github.com/gorilla/securecookie
+// Cookie security
+
 // https://www.sohamkamani.com/golang/session-cookie-authentication/
 func Welcome(w http.ResponseWriter, r *http.Request) {
 	// We can obtain the session token from the requests cookies, which come with every request
