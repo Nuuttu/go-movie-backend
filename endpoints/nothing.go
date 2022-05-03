@@ -7,6 +7,6 @@ import (
 )
 
 func Nothing(w http.ResponseWriter, r *http.Request) {
-	boom.NotFound(w, "Sorry, there's nothing here.")
+	boom.NotFound(w, "Sorry, there's absolutely nothing here.")
 	// https://pkg.go.dev/github.com/darahayes/go-boom?utm_source=godoc
 }
