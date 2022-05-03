@@ -26,9 +26,8 @@ import (
 )
 
 /* TODO
-	FIX setID
-/*
-
+FIX setID
+*/
 
 /*
 BASE_URL=http://localhost
